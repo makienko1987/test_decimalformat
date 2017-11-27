@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author      Andrey Makienko <makyshplat@gmail.com>
+ */
+-->
+<config>
+    <modules>
+        <Test_DecimalFactor>
+            <version>1.0.0</version>
+        </Test_DecimalFactor>
+    </modules>
+    <global>
+        <models>
+            <test_decimalfactor>
+                <class>Test_DecimalFactor_Model</class>
+                <resourceModel>test_decimalfactor_resource</resourceModel>
+            </test_decimalfactor>
+            <test_decimalfactor_resource>
+                <class>Test_DecimalFactor_Model_Resource</class>
+                <entities>
+                    <factor>
+                        <!--data storage table. Stores such data as order id and transform total value-->
+                        <table>test_decimal_factor</table>
+                    </factor>
+                </entities>
+            </test_decimalfactor_resource>
+        </models>
+        <resources>
+            <test_decimalfactor_setup>
+                <setup>
+                    <module>Test_DecimalFactor</module>
+                    <class>Mage_Core_Model_Resource_Setup</class>
+                </setup>
+            </test_decimalfactor_setup>
+        </resources>
+        <helpers>
+            <test_decimalfactor>
+                <class>Test_DecimalFactor_Helper</class>
+            </test_decimalfactor>
+        </helpers>
+        <events>
+            <!--main event for detecting paid orders-->
+            <sales_order_invoice_pay>
+                <observers>
+                    <test_sales_order_invoice_pay>
+                        <class>test_decimalfactor/observer</class>
+                        <method>addOrderTotalPaidData</method>
+                    </test_sales_order_invoice_pay>
+                </observers>
+            </sales_order_invoice_pay>
+        </events>
+    </global>
+    <adminhtml>
+        <translate>
+            <modules>
+                <test_decimalfactor>
+                    <files>
+                        <default>Test_DecimalFactor.csv</default>
+                    </files>
+                </test_decimalfactor>
+            </modules>
+        </translate>
+    </adminhtml>
+    <default>
+        <test_decimalfactor>
+            <test_group>
+                <is_active>1</is_active>
+                <decimal_factor>1</decimal_factor>
+                <upgrade_old_orders>0</upgrade_old_orders>
+            </test_group>
+        </test_decimalfactor>
+    </default>
+    <!--cron job run every 12 hours-->
+    <crontab>
+        <jobs>
+            <test_decimalfactor_queue>
+                <schedule>
+                    <cron_expr>0 */12 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>test_decimalfactor/cron::upgradeExistOrders</model>
+                </run>
+            </test_decimalfactor_queue>
+        </jobs>
+    </crontab>
+</config>

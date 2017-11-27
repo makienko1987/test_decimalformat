@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author      Andrey Makienko <makyshplat@gmail.com>
+ */
+-->
+<config>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <test_decimalfactor module="test_decimalfactor">
+                                        <title>Test Extensions</title>
+                                    </test_decimalfactor>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

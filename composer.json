@@ -1,0 +1,16 @@
+{
+  "name":"makienko1987/test_decimalfactor",
+  "type":"magento-module",
+  "license":"OSL-3.0",
+  "homepage": "https://github.com/makienko1987/test_decimalfactor",
+  "description":"Magento extension to add decimal factor to order paid total value",
+  "authors":[
+    {
+      "name":"Andrey Makienko",
+      "email":"makyshplat@gmail.com"
+    }
+  ],
+  "require":{
+    "magento-hackathon/magento-composer-installer":"*"
+  }
+}
